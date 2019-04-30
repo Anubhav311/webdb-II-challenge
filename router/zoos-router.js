@@ -66,7 +66,7 @@ router.put('/:id', (req, res) => {
                   message: `${count} ${count > 1 ? 'records' : 'record'} updated`,
                 });
               } else {
-                res.status(404).json({ message: 'Role does not exist' });
+                res.status(404).json({ message: 'Zoo does not exist' });
               }
         })
         .catch(err => {
