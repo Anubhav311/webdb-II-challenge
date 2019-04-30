@@ -13,7 +13,8 @@ const knexConfig = {
 const db = knex(knexConfig);
 
 router.post('/', (req, res) => {
-    db('zoos')
+    if(req.body.name) {
+        db('zoos')
         .insert(req.body, 'id')
         .then(zoos => {
             res.status(200).json(zoos);
@@ -21,7 +22,9 @@ router.post('/', (req, res) => {
         .catch(err => {
             console.log(err)
         })
-    // res.json('Hi')
+    } else {
+        res.status(404).json({message: "Please provide name"})
+    }
 })
 
 
@@ -33,7 +36,6 @@ router.get('/', (req, res) => {
         .catch(err => {
             console.log(err)
         })
-    // res.json('Hi')
 })
 
 module.exports = router;
