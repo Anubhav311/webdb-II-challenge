@@ -38,4 +38,21 @@ router.get('/', (req, res) => {
         })
 })
 
+router.get('/:id', (req, res) => {
+    db('bears')
+        .where({id: req.params.id})
+        .first()
+        .then(bear => {
+            if(bear) {
+                res.status(200).json(bear);
+            } else {
+                res.status(404).json({message: "Bear not found"})
+            }
+        })
+        .catch(err => {
+            res.status(500).json(err)
+        })
+})
+
+
 module.exports = router;
