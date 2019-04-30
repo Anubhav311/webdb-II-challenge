@@ -28,6 +28,7 @@ router.post('/', (req, res) => {
     }
 })
 
+
 router.get('/', (req, res) => {
     db('bears')
         .then(bears => {
@@ -37,6 +38,7 @@ router.get('/', (req, res) => {
             console.log(err)
         })
 })
+
 
 router.get('/:id', (req, res) => {
     db('bears')
@@ -53,6 +55,7 @@ router.get('/:id', (req, res) => {
             res.status(500).json(err)
         })
 })
+
 
 router.put('/:id', (req, res) => {
     db('bear')
@@ -71,6 +74,7 @@ router.put('/:id', (req, res) => {
             res.status(500).json(err);
         })
 })
+
 
 router.delete('/:id', (req, res) => {
     db('bears')
