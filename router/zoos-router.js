@@ -51,4 +51,40 @@ router.get('/:id', (req, res) => {
         })
 })
 
+
+router.get('/:id', (req, res) => {
+    db('zoos')
+        .where({id: req.params.id})
+        .first()
+        .then(zoo => {
+            if(zoo) {
+                res.status(200).json(zoo);
+            } else {
+                res.status(404).json({message: "Zoo not found"})
+            }
+        })
+        .catch(err => {
+            res.status(500).json(err)
+        })
+})
+
+
+router.put('/:id', (req, res) => {
+    db('zoos')
+        .where({id: req.params.id})
+        .update(req.body)
+        .then(count => {
+            if (count > 0) {
+                res.status(200).json({
+                  message: `${count} ${count > 1 ? 'records' : 'record'} updated`,
+                });
+              } else {
+                res.status(404).json({ message: 'Role does not exist' });
+              }
+        })
+        .catch(err => {
+            res.status(500).json(err);
+        })
+})
+
 module.exports = router;
