@@ -38,4 +38,17 @@ router.get('/', (req, res) => {
         })
 })
 
+
+router.get('/:id', (req, res) => {
+    db('zoos')
+        .where({id: req.params.id})
+        .first()
+        .then(zoo => {
+            res.status(200).json(zoo);
+        })
+        .catch(err => {
+            res.status(500).json(err)
+        })
+})
+
 module.exports = router;
